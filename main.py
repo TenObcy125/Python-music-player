@@ -23,10 +23,10 @@ class MP3Player:
         self.minutes = int(self.musicLen // 60)
         self.seconds = int(self.musicLen % 60)
         musicLengthText.configure(text=f"{self.minutes}:{self.seconds}")
-        musicSlider.configure(from_=0, to=self.musicLen)  # Aktualizacja zakresu slidera
+        musicSlider.configure(from_=0, to=self.musicLen)  
         
     def playSound(self):
-        if not pygame.mixer.music.get_busy():  # Sprawdź, czy muzyka nie jest odtwarzana
+        if not pygame.mixer.music.get_busy():  
             pygame.mixer.music.play()
             self.isRunning = True
         else:
@@ -37,7 +37,7 @@ class MP3Player:
         if self.isRunning:
             position = pygame.mixer.music.get_pos() / 1000  # Get position in seconds
             musicSlider.set(position)
-        root.after(100, self.updateSlider)  # Schedule next update after 100ms
+        root.after(100, self.updateSlider)  
 
 root = ctk.CTk()
 root.title("Wroblefy")
@@ -45,23 +45,23 @@ root.geometry('650x450')
 
 mp3Player = MP3Player()
 
-# Przycisk "Open MP3"
+
 openButton = ctk.CTkButton(root, text='Open MP3', corner_radius=10, command=mp3Player.openSound)
 openButton.pack(pady=True)  
 
-# Przycisk "Play/Pause"
+
 playButton = ctk.CTkButton(root, text='▶', corner_radius=10, command=mp3Player.playSound)
 playButton.pack(pady=True)
 
-# Slider
+
 musicSlider = ctk.CTkSlider(root, from_=0, to=1)
 musicSlider.pack(pady=True)
 
-# Etykieta z czasem trwania utworu
+
 musicLengthText = ctk.CTkLabel(root, text="00:00")
 musicLengthText.pack(pady=True)
 
-mp3Player.updateSlider()  # Rozpoczęcie aktualizacji slidera
+mp3Player.updateSlider() 
 
 historyFrame = ctk.CTkFrame(root, width=200,height=150,corner_radius=15)
 historyFrame.pack(pady=True)
